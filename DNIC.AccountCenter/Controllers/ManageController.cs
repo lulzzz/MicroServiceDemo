@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DNIC.AccountCenter.Extensions;
-using DNIC.AccountCenter.Models;
+using DNIC.AccountCenter.Core.Domain.Users;
 using DNIC.AccountCenter.Models.ManageViewModels;
 using DNIC.AccountCenter.Services;
 using Microsoft.AspNetCore.Authentication;

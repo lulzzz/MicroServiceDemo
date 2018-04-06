@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DNIC.AccountCenter.Services
+namespace DNIC.AccountCenter.Services.Messages
 {
     public interface IEmailSender
     {

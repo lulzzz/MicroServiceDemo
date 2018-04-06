@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DNIC.AccountCenter.Core.Interface
 {
-    interface IRepository<T> where T:BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
         /// <summary>
         /// 根据主键获取entity

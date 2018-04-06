@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DNIC.AccountCenter.Extensions;
-using DNIC.AccountCenter.Models;
+using DNIC.AccountCenter.Core.Domain.Users;
 using DNIC.AccountCenter.Models.AccountViewModels;
 using DNIC.AccountCenter.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -227,7 +227,7 @@ namespace DNIC.AccountCenter.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }

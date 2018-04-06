@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace DNIC.AccountCenter.Services
+namespace DNIC.AccountCenter.Services.Messages
 {
     public class EmailSender : IEmailSender
     {
