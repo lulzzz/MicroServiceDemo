@@ -12,21 +12,21 @@ namespace DNIC.AccountCenter.Services.Messages
 {
     public class EmailSender : IEmailSender
     {
-        public void SendEmail(EmailAccount emailAccount,
-      string subject,
-      string body,
-      string fromAddress,
-      string fromName,
-      string toAddress,
-      string toName,
-      string replyTo = null,
-      string replyToName = null,
-      IEnumerable<string> bcc = null,
-      IEnumerable<string> cc = null,
-      string attachmentFilePath = null,
-      string attachmentFileName = null,
-      int attachedDownloadId = 0,
-      IDictionary<string, string> headers = null)
+       public void SendEmail(EmailAccount emailAccount,
+       string subject,
+       string body,
+       string fromAddress,
+       string fromName,
+       string toAddress,
+       string toName,
+       string replyTo = null,
+       string replyToName = null,
+       IEnumerable<string> bcc = null,
+       IEnumerable<string> cc = null,
+       string attachmentFilePath = null,
+       string attachmentFileName = null,
+       int attachedDownloadId = 0,
+       IDictionary<string, string> headers = null)
         {
             var message = new MailMessage();
             //from, to, reply to
