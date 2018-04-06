@@ -40,11 +40,16 @@
 			services.AddMvc();
 		}
  注意AddIdentityServer一定要在AddIdentity后面
+
 * 打开项目所在文件夹, 运行如下EF迁移命令
+
 		dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
 		dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb
+
 * 在Nuget Package Manage Console中运行
+
 		update-database -Context ApplicationDbContext
 		update-database -Context PersistedGrantDbContext
 		update-database -Context ConfigurationDbContext
+
 * 项目构建完成, 如果有需要, 你可以自己再添加SeedData文件添加初始数据
