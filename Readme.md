@@ -3,7 +3,7 @@
 * .NET CORE SDK >= 2.0
 * Visual Studio 2017 Community or JetBrains Rider 2017.3
 
-## 如何构建一个包含注册、登录并且拥有IdentityServer的授权功能的ASP.NET CORE项目
+## 构建包含注册、登录并且拥有IdentityServer授权功能的ASP.NET CORE项目
 
 * 创建一个 Asp.net core 项目, 选择用户授权模式
 * 在 Nuget 管理器中添加: IdentityServer4.EntityFramework, IdentityServer4, IdentityServer4.AspNetIdentity 三个包
