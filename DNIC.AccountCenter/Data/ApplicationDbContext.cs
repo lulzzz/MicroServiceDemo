@@ -1,6 +1,9 @@
-﻿using DNIC.AccountCenter.Models;
+﻿using DNIC.AccountCenter.Core.Domain.Messages;
+using DNIC.AccountCenter.Core.Domain.Users;
+using DNIC.AccountCenter.Core.Infrastructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace DNIC.AccountCenter.Data
 {
@@ -11,12 +14,23 @@ namespace DNIC.AccountCenter.Data
         {
         }
 
+        public DbSet<EmailAccount> EmailAccount { get;set;}
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //#region 使用反射找到domain配置，实现自动生成数据库表
+
+            //var typeFinder = new AppDomainTypeFinder();
+            //var typesToRegister = typeFinder.FindClassesOfType(typeof(IEntityTypeConfiguration<>));
+
+            //foreach (var type in typesToRegister)
+            //{
+            //    dynamic configurationInstance = Activator.CreateInstance(type);
+            //    builder.ApplyConfiguration(configurationInstance);
+            //}
+            //#endregion
+
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }
