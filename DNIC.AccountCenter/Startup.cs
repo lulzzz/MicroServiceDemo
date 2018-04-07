@@ -90,6 +90,8 @@ namespace DNIC.AccountCenter
             // Add application services.
             services.AddMyServices();
 
+            //add cached
+            services.AddMemoryCache();
 
             services.AddMvc();
 

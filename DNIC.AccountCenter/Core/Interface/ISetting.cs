@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DNIC.AccountCenter.Extensions
+namespace DNIC.AccountCenter.Core.Interface
 {
-    public static class ServicesExtensions
+    public interface ISetting
     {
     }
 }

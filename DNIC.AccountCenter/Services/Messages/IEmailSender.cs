@@ -41,4 +41,3 @@ namespace DNIC.AccountCenter.Services.Messages
             IDictionary<string, string> headers = null);
     }
 }
-}

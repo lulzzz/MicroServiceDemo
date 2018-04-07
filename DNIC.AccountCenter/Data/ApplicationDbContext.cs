@@ -1,4 +1,5 @@
 ﻿using DNIC.AccountCenter.Core.Domain.Messages;
+using DNIC.AccountCenter.Core.Domain.Settings;
 using DNIC.AccountCenter.Core.Domain.Users;
 using DNIC.AccountCenter.Core.Infrastructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,6 +16,8 @@ namespace DNIC.AccountCenter.Data
         }
 
         public DbSet<EmailAccount> EmailAccount { get;set;}
+
+        public DbSet<Setting> Setting { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
