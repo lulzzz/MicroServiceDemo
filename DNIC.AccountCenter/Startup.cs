@@ -69,18 +69,19 @@ namespace DNIC.AccountCenter
 
 			// 添加外部授权: 后面需要支持QQ, 微信, 微博等主流平台
 			services.AddAuthentication()
-				.AddOpenIdConnect("oidc", "OpenID Connect", options =>
-				{
-					options.Authority = "https://demo.identityserver.io/";
-					options.ClientId = "implicit";
-					options.SaveTokens = true;
+				//.AddOpenIdConnect("oidc", "OpenID Connect", options =>
+				//{
+				//	options.Authority = "https://demo.identityserver.io/";
+				//	options.ClientId = "implicit";
+				//	options.SaveTokens = true;
 
-					options.TokenValidationParameters = new TokenValidationParameters
-					{
-						NameClaimType = "name",
-						RoleClaimType = "role"
-					};
-				});
+				//	options.TokenValidationParameters = new TokenValidationParameters
+				//	{
+				//		NameClaimType = "name",
+				//		RoleClaimType = "role"
+				//	};
+				//})
+				;
 
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();
@@ -108,7 +109,7 @@ namespace DNIC.AccountCenter
 
 			app.UseMvcWithDefaultRoute();
 
-			//InitializeDatabase(app);
+			InitializeDatabase(app);
 		}
 
 		private void InitializeDatabase(IApplicationBuilder app)
