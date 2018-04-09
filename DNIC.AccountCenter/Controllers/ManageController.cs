@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DNIC.AccountCenter.Extensions;
-using DNIC.AccountCenter.Models;
+using DNIC.AccountCenter.Core.Domain.Users;
 using DNIC.AccountCenter.Models.ManageViewModels;
 using DNIC.AccountCenter.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using DNIC.AccountCenter.Services.Messages;
 
 namespace DNIC.AccountCenter.Controllers
 {
@@ -123,7 +124,7 @@ namespace DNIC.AccountCenter.Controllers
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
             var email = user.Email;
-            await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
+            _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
