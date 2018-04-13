@@ -61,9 +61,7 @@ namespace DNIC.AccountCenter
 					ClientId = "DNIC.Erechtheion",
 					ClientName = "DNIC.Erechtheion",
 					AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
-
-					RequireConsent = false,
-
+					RequireConsent = true,
 					ClientSecrets =
 					{
 						new Secret("secret".Sha256())
@@ -71,7 +69,6 @@ namespace DNIC.AccountCenter
 
 					RedirectUris = { "http://localhost:5001/signin-oidc" },
 					PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
-
 					AllowedScopes =
 					{
 						IdentityServerConstants.StandardScopes.OpenId,

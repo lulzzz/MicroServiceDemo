@@ -42,10 +42,19 @@ namespace DNIC.AccountCenter
 
 			services.AddIdentity<ApplicationUser, IdentityRole>(config =>
 			{
+				config.User.RequireUniqueEmail = true;
+				config.Password = new PasswordOptions
+				{
+					RequireDigit = true,
+					RequireUppercase = false,
+					RequireLowercase = true,
+					RequiredLength = 8
+				};
 				config.SignIn.RequireConfirmedEmail = false;
+				config.SignIn.RequireConfirmedPhoneNumber = false;
 			})
-				.AddEntityFrameworkStores<ApplicationDbContext>()
-				.AddDefaultTokenProviders();
+			.AddEntityFrameworkStores<ApplicationDbContext>()
+			.AddDefaultTokenProviders();
 
 			var identityServerBuilder = services.AddIdentityServer()
 					.AddConfigurationStore(options =>
