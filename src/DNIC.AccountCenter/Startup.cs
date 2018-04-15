@@ -38,11 +38,15 @@ namespace DNIC.AccountCenter
 		{
 			var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+			var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+			var dbContextBuilder = env.IsDevelopment() ?
+				new Action<DbContextOptionsBuilder>(options => options.UseSqlite(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly))) : new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
+
+			services.AddDbContext<ApplicationDbContext>(dbContextBuilder);
 
 			AddIdentity(services);
 
-			AddIdentityServer(connectionString, services);
+			AddIdentityServer(dbContextBuilder, services);
 
 			services.AddAccountCenterServices();
 
@@ -106,15 +110,15 @@ namespace DNIC.AccountCenter
 			.AddDefaultTokenProviders();
 		}
 
-		private void AddIdentityServer(string connectionString, IServiceCollection services)
+		private void AddIdentityServer(Action<DbContextOptionsBuilder> dbContextOptionsBuilder, IServiceCollection services)
 		{
 			var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
 			var identityServerBuilder = services.AddIdentityServer()
-				.AddConfigurationStore(options => options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)))
+				.AddConfigurationStore(options => options.ConfigureDbContext = dbContextOptionsBuilder)
 				.AddOperationalStore(options =>
 				{
-					options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+					options.ConfigureDbContext = dbContextOptionsBuilder;
 					options.EnableTokenCleanup = true;
 					options.TokenCleanupInterval = 30;
 				})
