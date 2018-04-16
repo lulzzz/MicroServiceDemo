@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GracefulTear.Web.Controllers
 {
 	[Route("[controller]/[action]")]
-	public class UsersController : Controller
+	public class UserController : Controller
 	{
 		public IActionResult Index()
 		{

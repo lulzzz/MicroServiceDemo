@@ -13,7 +13,6 @@ namespace GracefulTear.Core.Models
 		[ForeignKey("ParentRoleId")]
 		public virtual ICollection<Role> ChildRoles { get; set; }
 
-
 		/// <summary>
 		/// Last modification date of this entity.
 		/// </summary>

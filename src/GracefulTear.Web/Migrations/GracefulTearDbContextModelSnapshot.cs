@@ -11,7 +11,7 @@ using System;
 namespace GracefulTear.Web.Migrations
 {
     [DbContext(typeof(GracefulTearDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class GracefulTearDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

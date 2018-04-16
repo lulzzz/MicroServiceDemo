@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GracefulTear.Core.Models;
+using GracefulTear.Core.Services.Role.Dto;
 using GracefulTear.Core.Services.User.Dto;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace GracefulTear.Core
 			Mapper.Initialize(config =>
 			{
 				config.CreateMap<User, UserDto>();
+				config.CreateMap<Role, RoleDto>();
 			});
 		}
 	}

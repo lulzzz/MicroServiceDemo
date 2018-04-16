@@ -1,4 +1,6 @@
-﻿using GracefulTear.Core;
+﻿using System;
+using System.Linq;
+using GracefulTear.Core;
 using GracefulTear.Core.Services;
 using GracefulTear.Web.Data;
 using Microsoft.AspNetCore;
@@ -31,8 +33,32 @@ namespace GracefulTear.Web
 		{
 			using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 			{
-				serviceScope.ServiceProvider.GetService<GracefulTearDbContext>().Database.Migrate();
+				var dbContext = serviceScope.ServiceProvider.GetService<GracefulTearDbContext>();
+				dbContext.Database.Migrate();
+
+				AddSeedData(dbContext);
+
 				serviceScope.ServiceProvider.GetService<ISeedData>().EnsureSeedData();
+			}
+		}
+
+		private static void AddSeedData(GracefulTearDbContext dbContext)
+		{
+			if (!dbContext.Roles.Any())
+			{
+				var role1 = new Core.Models.Role
+				{
+					Name = "role1"
+				};
+				dbContext.Roles.Add(role1);
+				var role2 = new Core.Models.Role
+				{
+					Name = "role2"
+				};
+				role2.ChildRoles = new Core.Models.Role[] { role1 };
+				dbContext.Roles.Add(role2);
+
+				dbContext.SaveChanges();
 			}
 		}
 

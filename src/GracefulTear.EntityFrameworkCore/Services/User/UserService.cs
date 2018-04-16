@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GracefulTear.Core.Models;
+using GracefulTear.Core.Services.User;
 using GracefulTear.Core.Services.User.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,20 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GracefulTear.Core.Services.User
+namespace GracefulTear.EntityFrameworkCore.Services.User
 {
 	public class UserService : IUserService
 	{
-		private readonly UserManager<Models.User> userManager;
+		private readonly UserManager<Core.Models.User> userManager;
 
-		public UserService(UserManager<Models.User> userManager)
+		public UserService(UserManager<Core.Models.User> userManager)
 		{
 			this.userManager = userManager;
 		}
 
 		public async Task<IEnumerable<UserDto>> GetAll()
 		{
-			return await Task.FromResult(Mapper.Map<IEnumerable<Models.User>, IEnumerable<UserDto>>(userManager.Users));
+			return await Task.FromResult(Mapper.Map<IEnumerable<Core.Models.User>, IEnumerable<UserDto>>(userManager.Users));
 		}
 	}
 }

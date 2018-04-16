@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace GracefulTear.Web.Controllers.Api
 {
 	[Route("api/[controller]")]
-	public class UsersController : Controller
+	public class UserController : Controller
 	{
 		private readonly IUserService userService;
 
-		public UsersController(IUserService userService)
+		public UserController(IUserService userService)
 		{
 			this.userService = userService;
 		}

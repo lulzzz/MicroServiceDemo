@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GracefulTear.Web.Controllers
 {
-	public class ClientsController : Controller
+	public class ClientController : Controller
 	{
 		public async Task<IActionResult> Index()
 		{

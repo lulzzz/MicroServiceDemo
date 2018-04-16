@@ -11,7 +11,7 @@ using System;
 namespace GracefulTear.Web.Migrations
 {
     [DbContext(typeof(GracefulTearDbContext))]
-    [Migration("20180416075203_InitApplicationDbMigration")]
+    [Migration("20180416092626_InitApplicationDbMigration")]
     partial class InitApplicationDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

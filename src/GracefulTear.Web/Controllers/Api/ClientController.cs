@@ -12,11 +12,11 @@ namespace GracefulTear.Web.Controllers.Api
 	[NoCache]
 	[Route("api/[controller]")]
 	//[Authorize(Roles = "superadmin")]
-	public class ClientsController : Controller
+	public class ClientController : Controller
 	{
 		private readonly IClientService clientService;
 
-		public ClientsController(IClientService clientService)
+		public ClientController(IClientService clientService)
 		{
 			this.clientService = clientService;
 		}
