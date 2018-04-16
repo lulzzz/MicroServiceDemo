@@ -1,12 +1,13 @@
-﻿using GracefulTear.Web.Models;
+﻿using GracefulTear.Core.Models;
+using GracefulTear.Web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GracefulTear.Web.Data
 {
-	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+	public class GracefulTearDbContext : IdentityDbContext<User, Role, string>
 	{
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+		public GracefulTearDbContext(DbContextOptions<GracefulTearDbContext> options)
 			: base(options)
 		{
 		}

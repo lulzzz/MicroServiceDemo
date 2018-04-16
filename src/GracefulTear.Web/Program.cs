@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore;
+﻿using GracefulTear.Core;
+using GracefulTear.Core.Services;
+using GracefulTear.Web.Data;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -17,8 +22,18 @@ namespace GracefulTear.Web
 				.WriteTo.File(@"DNIC.AccountCenter.log")
 				.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
 				.CreateLogger();
+			var host = BuildWebHost(args);
+			Migrate(host);
+			host.Run();
+		}
 
-			BuildWebHost(args).Run();
+		public static void Migrate(IWebHost app)
+		{
+			using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			{
+				serviceScope.ServiceProvider.GetService<GracefulTearDbContext>().Database.Migrate();
+				serviceScope.ServiceProvider.GetService<ISeedData>().EnsureSeedData();
+			}
 		}
 
 		public static IWebHost BuildWebHost(string[] args) =>

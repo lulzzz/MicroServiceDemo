@@ -5,7 +5,7 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
 @model GracefulTear.Web.Models.AccountViewModels.LoginViewModel
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<GracefulTear.Core.Models.User> SignInManager
 
 @{
 	ViewData["Title"] = "Log in";

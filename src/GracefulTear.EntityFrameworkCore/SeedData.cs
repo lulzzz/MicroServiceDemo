@@ -1,4 +1,5 @@
 ﻿using GracefulTear.Core;
+using GracefulTear.Core.Services;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,11 @@ using System.Text;
 
 namespace GracefulTear.EntityFrameworkCore
 {
-	public class RepositorySeedData : IRepositorySeedData
+	public class SeedData : ISeedData
 	{
 		private readonly IServiceProvider serviceProvider;
 
-		public RepositorySeedData(IServiceProvider serviceProvider)
+		public SeedData(IServiceProvider serviceProvider)
 		{
 			this.serviceProvider = serviceProvider;
 		}

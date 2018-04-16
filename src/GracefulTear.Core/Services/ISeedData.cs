@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GracefulTear.Core
+namespace GracefulTear.Core.Services
 {
-	public interface IRepositorySeedData
+	public interface ISeedData
 	{
 		void EnsureSeedData();
 	}

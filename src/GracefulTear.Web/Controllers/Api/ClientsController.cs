@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GracefulTear.Core.Services.Client;
+using GracefulTear.Core.Services.Resource;
 using GracefulTear.Web.Filters;
 using GracefulTear.Web.Services;
 using IdentityServer4.Models;
@@ -10,19 +12,19 @@ namespace GracefulTear.Web.Controllers.Api
 	[NoCache]
 	[Route("api/[controller]")]
 	//[Authorize(Roles = "superadmin")]
-	public class ResourceController : Controller
+	public class ClientsController : Controller
 	{
-		private readonly IResourceService _apiResourceService;
+		private readonly IClientService clientService;
 
-		public ResourceController(IResourceService apiResourceService)
+		public ClientsController(IClientService clientService)
 		{
-			_apiResourceService = apiResourceService;
+			this.clientService = clientService;
 		}
 
 		[HttpGet]
 		public async Task<IEnumerable<Client>> GetAll()
 		{
-			return await _apiResourceService.GetAll();
+			return await clientService.GetAll();
 		}
 	}
 }

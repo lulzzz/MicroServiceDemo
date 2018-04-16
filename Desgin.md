@@ -1,4 +1,6 @@
-## DNIC的注册、登录与授权服务
+## 基于Identity和IdentityServer4的通用权限管理系统
+
+
 
 ### 用户权限管理
 

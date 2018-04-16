@@ -1,5 +1,8 @@
 ﻿using GracefulTear.Core;
+using GracefulTear.Core.Services;
+using GracefulTear.Core.Services.Resource;
 using GracefulTear.EntityFrameworkCore;
+using GracefulTear.EntityFrameworkCore.Services.Resource;
 using GracefulTear.Web.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,8 +14,7 @@ namespace GracefulTear.Web.Extensions
 		{
 			// Add application services.
 			services.AddScoped<IEmailSender, EmailSender>();
-			services.AddScoped<IResourceService, ResourceService>();
-			services.AddScoped<IRepositorySeedData, RepositorySeedData>();
+			services.AddScoped<ISeedData, SeedData>();
 		}
 	}
 }

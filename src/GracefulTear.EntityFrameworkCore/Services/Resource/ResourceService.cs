@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GracefulTear.Core;
+using GracefulTear.Core.Services.Resource;
 using IdentityServer4.EntityFramework.Interfaces;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Models;
@@ -9,13 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GracefulTear.EntityFrameworkCore
+namespace GracefulTear.EntityFrameworkCore.Services.Resource
 {
-	public class ResourceDbContext : IResourceDbContext
+	public class ResourceService : IResourceService
 	{
 		private readonly IConfigurationDbContext _configurationDbContext;
 
-		public ResourceDbContext(IConfigurationDbContext configurationDbContext)
+		public ResourceService(IConfigurationDbContext configurationDbContext)
 		{
 			_configurationDbContext = configurationDbContext;
 		}
@@ -25,23 +26,9 @@ namespace GracefulTear.EntityFrameworkCore
 			await _configurationDbContext.ApiResources.AddAsync(entity.ToEntity());
 		}
 
-		public async Task AddClient(Client entity)
-		{
-			await _configurationDbContext.Clients.AddAsync(entity.ToEntity());
-		}
-
 		public async Task AddIdentityResource(IdentityResource entity)
 		{
 			await _configurationDbContext.IdentityResources.AddAsync(entity.ToEntity());
-		}
-
-		public Task<IEnumerable<Client>> GetAll()
-		{
-			return Task.FromResult(Mapper.Map<IEnumerable<Client>>(_configurationDbContext.Clients.ToArray()));
-		}
-
-		public void Dispose()
-		{
 		}
 	}
 }

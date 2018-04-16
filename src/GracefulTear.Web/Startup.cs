@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Security.Cryptography;
 using GracefulTear.Core;
+using GracefulTear.Core.Models;
 using GracefulTear.EntityFrameworkCore;
 using GracefulTear.Web.Data;
 using GracefulTear.Web.Extensions;
@@ -9,6 +10,7 @@ using GracefulTear.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,9 +38,10 @@ namespace GracefulTear.Web
 
 			var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 			var dbContextBuilder = env.IsDevelopment() ?
-				new Action<DbContextOptionsBuilder>(options => options.UseSqlite(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly))) : new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
+				new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly))) :
+				new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
 
-			services.AddDbContext<ApplicationDbContext>(dbContextBuilder);
+			services.AddDbContext<GracefulTearDbContext>(dbContextBuilder);
 
 			AddIdentity(services);
 
@@ -74,22 +77,11 @@ namespace GracefulTear.Web
 			app.UseIdentityServer();
 
 			app.UseMvcWithDefaultRoute();
-
-			DbMigrate(app);
-		}
-
-		private void DbMigrate(IApplicationBuilder app)
-		{
-			using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-			{
-				serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-				serviceScope.ServiceProvider.GetService<IRepositorySeedData>().EnsureSeedData();
-			}
 		}
 
 		private void AddIdentity(IServiceCollection services)
 		{
-			services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+			services.AddIdentity<User, Role>(config =>
 			{
 				config.User.RequireUniqueEmail = true;
 				config.Password = new PasswordOptions
@@ -102,7 +94,7 @@ namespace GracefulTear.Web
 				config.SignIn.RequireConfirmedEmail = false;
 				config.SignIn.RequireConfirmedPhoneNumber = false;
 			})
-			.AddEntityFrameworkStores<ApplicationDbContext>()
+			.AddEntityFrameworkStores<GracefulTearDbContext>()
 			.AddDefaultTokenProviders();
 		}
 
@@ -118,7 +110,7 @@ namespace GracefulTear.Web
 					options.EnableTokenCleanup = true;
 					options.TokenCleanupInterval = 30;
 				})
-				.AddAspNetIdentity<ApplicationUser>()
+				.AddAspNetIdentity<User>()
 				.AddAdminEFProvider();
 
 			if (env.IsDevelopment())
