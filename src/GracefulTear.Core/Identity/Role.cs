@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GracefulTear.Core.Domains;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace GracefulTear.Core.Models
+namespace GracefulTear.Core.Identity
 {
 	public class Role : IdentityRole, IAudited
 	{

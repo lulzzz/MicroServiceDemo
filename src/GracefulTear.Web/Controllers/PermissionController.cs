@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace GracefulTear.Web.Controllers
 {
-	[Route("[controller]/[action]")]
 	public class PermissionController : Controller
 	{
 		private readonly IRoleService roleService;

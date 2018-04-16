@@ -46,21 +46,21 @@ namespace GracefulTear.Web
 		{
 			if (!dbContext.Roles.Any())
 			{
-				var role1 = new Core.Models.Role
+				var role1 = new Core.Identity.Role
 				{
 					Name = "role1"
 				};
 				dbContext.Roles.Add(role1);
-				var role2 = new Core.Models.Role
+				var role2 = new Core.Identity.Role
 				{
 					Name = "role2"
 				};
-				role2.ChildRoles = new Core.Models.Role[] { role1 };
+				role2.ChildRoles = new Core.Identity.Role[] { role1 };
 				dbContext.Roles.Add(role2);
 
 				for (int i = 5; i < 100; ++i)
 				{
-					var role = new Core.Models.Role
+					var role = new Core.Identity.Role
 					{
 						Name = "role" + i
 					};

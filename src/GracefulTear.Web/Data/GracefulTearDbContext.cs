@@ -1,4 +1,4 @@
-﻿using GracefulTear.Core.Models;
+﻿using GracefulTear.Core.Identity;
 using GracefulTear.Web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

@@ -1,8 +1,8 @@
 @using GracefulTear.Web.Models
 @using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<GracefulTear.Core.Models.User> SignInManager
-@inject UserManager<GracefulTear.Core.Models.User> UserManager
+@inject SignInManager<GracefulTear.Core.Identity.User> SignInManager
+@inject UserManager<GracefulTear.Core.Identity.User> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

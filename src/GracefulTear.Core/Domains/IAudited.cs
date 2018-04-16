@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GracefulTear.Core.Models
+namespace GracefulTear.Core.Domains
 {
 	public interface IAudited : IEntity<string>
 	{

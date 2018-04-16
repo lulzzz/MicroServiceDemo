@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using GracefulTear.Core.Models;
+using GracefulTear.Core.Identity;
 using GracefulTear.Web.Extensions;
 using GracefulTear.Web.Models;
 using GracefulTear.Web.Models.ManageViewModels;

@@ -15,9 +15,9 @@ namespace GracefulTear.EntityFrameworkCore.Services.Role
 {
 	public class RoleService : IRoleService
 	{
-		private readonly RoleManager<Core.Models.Role> roleManager;
+		private readonly RoleManager<Core.Identity.Role> roleManager;
 
-		public RoleService(RoleManager<Core.Models.Role> roleManager)
+		public RoleService(RoleManager<Core.Identity.Role> roleManager)
 		{
 			this.roleManager = roleManager;
 		}
@@ -28,18 +28,18 @@ namespace GracefulTear.EntityFrameworkCore.Services.Role
 			PaginationQueryResult<RoleDto> output;
 			if (string.IsNullOrWhiteSpace(name))
 			{
-				output = roleManager.Roles.PageList<Core.Models.Role, string, RoleDto>(input);
+				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto>(input);
 			}
 			else
 			{
-				output = roleManager.Roles.PageList<Core.Models.Role, string, RoleDto>(input, e => e.Name.ToLower().Contains(name));
+				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto>(input, e => e.Name.ToLower().Contains(name));
 			}
 			return output;
 		}
 
 		public async Task<IEnumerable<RoleDto>> GetAll()
 		{
-			return await Task.FromResult(Mapper.Map<IEnumerable<Core.Models.Role>, IEnumerable<RoleDto>>(roleManager.Roles.Include(d => d.ChildRoles)));
+			return await Task.FromResult(Mapper.Map<IEnumerable<Core.Identity.Role>, IEnumerable<RoleDto>>(roleManager.Roles.Include(d => d.ChildRoles)));
 		}
 	}
 }

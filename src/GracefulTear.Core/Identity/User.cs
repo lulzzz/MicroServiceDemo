@@ -1,8 +1,8 @@
-﻿using GracefulTear.Core.Models;
+﻿using GracefulTear.Core.Domains;
 using Microsoft.AspNetCore.Identity;
 using System;
 
-namespace GracefulTear.Core.Models
+namespace GracefulTear.Core.Identity
 {
 	public class User : IdentityUser, IAudited
 	{

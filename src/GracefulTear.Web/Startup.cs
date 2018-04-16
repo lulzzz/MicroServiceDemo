@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Security.Cryptography;
 using GracefulTear.Core;
-using GracefulTear.Core.Models;
+using GracefulTear.Core.Identity;
 using GracefulTear.EntityFrameworkCore;
 using GracefulTear.Web.Data;
 using GracefulTear.Web.Extensions;

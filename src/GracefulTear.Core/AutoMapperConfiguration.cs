@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GracefulTear.Core.Models;
+using GracefulTear.Core.Identity;
 using GracefulTear.Core.Services.Role.Dto;
 using GracefulTear.Core.Services.User.Dto;
 using System;

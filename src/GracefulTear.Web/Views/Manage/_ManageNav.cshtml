@@ -1,6 +1,6 @@
 ﻿@using GracefulTear.Web.Models
 @using GracefulTear.Web.Views.Manage
-@inject SignInManager<GracefulTear.Core.Models.User> SignInManager
+@inject SignInManager<GracefulTear.Core.Identity.User> SignInManager
 @{
 	var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

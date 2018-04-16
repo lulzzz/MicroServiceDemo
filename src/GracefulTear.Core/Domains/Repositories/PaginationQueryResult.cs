@@ -1,5 +1,5 @@
 ﻿using GracefulTear.Core.Applications.Dtos;
-using GracefulTear.Core.Models;
+using GracefulTear.Core.Domains;
 using System;
 using System.Collections.Generic;
 using System.Text;
