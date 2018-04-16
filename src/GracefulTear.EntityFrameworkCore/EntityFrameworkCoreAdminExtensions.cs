@@ -36,9 +36,9 @@ namespace GracefulTear.EntityFrameworkCore
 			return builder;
 		}
 
-		public static PaginationQueryResult<TDto> PageList<TEntity, TKey, TDto>(this IQueryable<TEntity> dbSet, PaginationQuery input,
+		public static PaginationQueryResult<TDto> PageList<TEntity, TKey, TDto, TProperty>(this IQueryable<TEntity> dbSet, PaginationQuery input,
 			Expression<Func<TEntity, bool>> where = null,
-			Expression<Func<TEntity, TKey>> orderBy = null, bool orderByDesc = false) where TEntity : class, IEntity<TKey> where TDto : IDto
+			Expression<Func<TEntity, TKey>> orderBy = null, bool orderByDesc = false, Expression<Func<TEntity, TProperty>> navigationPropertyPath = null) where TEntity : class, IEntity<TKey> where TDto : IDto
 		{
 			input.Validate();
 			PaginationQueryResult<TDto> output = new PaginationQueryResult<TDto>();
@@ -71,6 +71,11 @@ namespace GracefulTear.EntityFrameworkCore
 				{
 					entities = entities.OrderBy(orderBy).Skip((input.Page - 1) * input.PageSize).Take(input.PageSize);
 				}
+			}
+
+			if (navigationPropertyPath != null)
+			{
+				entities = entities.Include(navigationPropertyPath);
 			}
 
 			output.Page = input.Page;

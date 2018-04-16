@@ -28,11 +28,12 @@ namespace GracefulTear.EntityFrameworkCore.Services.Role
 			PaginationQueryResult<RoleDto> output;
 			if (string.IsNullOrWhiteSpace(name))
 			{
-				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto>(input);
+				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto, ICollection<Core.Identity.Role>>(input, null, null, false, t => t.ChildRoles);
 			}
 			else
 			{
-				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto>(input, e => e.Name.ToLower().Contains(name));
+				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto, ICollection<Core.Identity.Role>>(input, e => e.Name.ToLower().Contains(name), null, false, t => t.ChildRoles);
+				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto, ICollection<Core.Identity.Role>>(input, e => e.Name.ToLower().Contains(name), null, false, t => t.ChildRoles);
 			}
 			return output;
 		}

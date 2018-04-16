@@ -1,15 +1,22 @@
-﻿using GracefulTear.Core.Identity;
+﻿using GracefulTear.Core.Domains;
+using GracefulTear.Core.Identity;
 using GracefulTear.Web.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Security.Claims;
 
 namespace GracefulTear.Web.Data
 {
 	public class GracefulTearDbContext : IdentityDbContext<User, Role, string>
 	{
-		public GracefulTearDbContext(DbContextOptions<GracefulTearDbContext> options)
+		private readonly IHttpContextAccessor contextAccessor;
+
+		public GracefulTearDbContext(DbContextOptions<GracefulTearDbContext> options, IHttpContextAccessor contextAccessor)
 			: base(options)
 		{
+			this.contextAccessor = contextAccessor;
 		}
 
 		protected override void OnModelCreating(ModelBuilder builder)
@@ -27,6 +34,37 @@ namespace GracefulTear.Web.Data
 			//#endregion
 
 			base.OnModelCreating(builder);
+		}
+
+		public override int SaveChanges()
+		{
+			ApplyConcepts();
+			return base.SaveChanges();
+		}
+
+		private void ApplyConcepts()
+		{
+			var value = contextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+			var entries = ChangeTracker.Entries();
+			foreach (var entry in entries)
+			{
+				if (entry.Entity is IAudited e)
+				{
+					switch (entry.State)
+					{
+						case EntityState.Added:
+							e.CreatorUserId = value;
+							e.CreationTime = DateTime.Now;
+							break;
+
+						case EntityState.Modified:
+							e.LastModifierUserId = value;
+							e.LastModificationTime = DateTime.Now;
+							break;
+					}
+				}
+			}
 		}
 	}
 }

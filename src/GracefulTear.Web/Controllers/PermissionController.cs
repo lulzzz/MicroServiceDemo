@@ -20,7 +20,7 @@ namespace GracefulTear.Web.Controllers
 		[HttpGet]
 		public IActionResult Index([FromQuery]PaginationQuery input)
 		{
-			return new JsonResult(roleService.Find(input));
+			return View(roleService.Find(input));
 		}
 	}
 }
