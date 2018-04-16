@@ -8,12 +8,12 @@
 * 设置 DNIC.AccountCenter 为启动项目
 * 在 Package Manager Console 中运行如下命令
 
-		add-migration InitApplicationDbMigration -c ApplicationDbContext
-		add-migration InitID4PersistedGrantDbMigration -c PersistedGrantDbContext
-		add-migration InitID4ConfigurationDbMigration -c ConfigurationDbContext
+		add-migration GracefulTear -c GracefulTearDbContext
+		add-migration Id4Configuration -c ConfigurationDbContext
+		add-migration Id4PersistedGrants -c PersistedGrantDbContext
 
 * 执行成功后再运行
 
-		update-database -Context ApplicationDbContext
-		update-database -Context PersistedGrantDbContext
-		update-database -Context ConfigurationDbContext
+		update-database -Context GracefulTearDbContext
+		update-database -Context PersistedGrantDbMigration
+		update-database -Context ConfigurationDbMigration

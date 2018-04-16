@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GracefulTear.Core.Applications.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GracefulTear.Core.Services.Role.Dto
 {
-	public class RoleDto
+	public class RoleDto : IDto
 	{
 		//
 		// Summary:

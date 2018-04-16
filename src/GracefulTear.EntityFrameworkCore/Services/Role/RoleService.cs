@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using IDM = IdentityServer4.Models;
 using Microsoft.EntityFrameworkCore;
+using GracefulTear.Core.Domains.Repositories;
+using GracefulTear.EntityFrameworkCore;
 
 namespace GracefulTear.EntityFrameworkCore.Services.Role
 {
@@ -18,6 +20,21 @@ namespace GracefulTear.EntityFrameworkCore.Services.Role
 		public RoleService(RoleManager<Core.Models.Role> roleManager)
 		{
 			this.roleManager = roleManager;
+		}
+
+		public PaginationQueryResult<RoleDto> Find(PaginationQuery input)
+		{
+			var name = input.GetFilter("name");
+			PaginationQueryResult<RoleDto> output;
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				output = roleManager.Roles.PageList<Core.Models.Role, string, RoleDto>(input);
+			}
+			else
+			{
+				output = roleManager.Roles.PageList<Core.Models.Role, string, RoleDto>(input, e => e.Name.ToLower().Contains(name));
+			}
+			return output;
 		}
 
 		public async Task<IEnumerable<RoleDto>> GetAll()

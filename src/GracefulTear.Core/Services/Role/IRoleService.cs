@@ -1,4 +1,5 @@
-﻿using GracefulTear.Core.Services.Role.Dto;
+﻿using GracefulTear.Core.Domains.Repositories;
+using GracefulTear.Core.Services.Role.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace GracefulTear.Core.Services.Role
 	public interface IRoleService
 	{
 		Task<IEnumerable<RoleDto>> GetAll();
+		PaginationQueryResult<RoleDto> Find(PaginationQuery input);
 	}
 }

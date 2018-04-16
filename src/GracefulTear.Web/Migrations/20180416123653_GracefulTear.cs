@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GracefulTear.Web.Migrations
 {
-    public partial class InitApplicationDbMigration : Migration
+    public partial class GracefulTear : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,8 @@ namespace GracefulTear.Web.Migrations
                     LastModifierUserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ParentRoleId = table.Column<string>(nullable: true)
+                    ParentRoleId = table.Column<string>(nullable: true),
+                    RoleType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -58,6 +58,15 @@ namespace GracefulTear.Web
 				role2.ChildRoles = new Core.Models.Role[] { role1 };
 				dbContext.Roles.Add(role2);
 
+				for (int i = 5; i < 100; ++i)
+				{
+					var role = new Core.Models.Role
+					{
+						Name = "role" + i
+					};
+					dbContext.Roles.Add(role);
+				}
+
 				dbContext.SaveChanges();
 			}
 		}

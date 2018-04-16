@@ -10,6 +10,8 @@ namespace GracefulTear.Core.Models
 	{
 		public string ParentRoleId { get; set; }
 
+		public RoleType RoleType { get; set; }
+
 		[ForeignKey("ParentRoleId")]
 		public virtual ICollection<Role> ChildRoles { get; set; }
 
