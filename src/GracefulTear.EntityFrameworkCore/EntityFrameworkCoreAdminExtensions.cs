@@ -20,6 +20,8 @@ using System.Linq.Expressions;
 using System.Linq;
 using GracefulTear.Core.Applications.Dtos;
 using System.Collections.Generic;
+using GracefulTear.Core.Services.Permission;
+using GracefulTear.EntityFrameworkCore.Services.Permission;
 
 namespace GracefulTear.EntityFrameworkCore
 {
@@ -33,6 +35,7 @@ namespace GracefulTear.EntityFrameworkCore
 			builder.Services.AddTransient<IClientService, ClientService>();
 			builder.Services.AddTransient<IUserService, UserService>();
 			builder.Services.AddTransient<IRoleService, RoleService>();
+			builder.Services.AddTransient<IPermissionService, PermissionService>();
 			return builder;
 		}
 

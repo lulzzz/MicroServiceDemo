@@ -1,4 +1,5 @@
 ﻿using GracefulTear.Core.Domains.Repositories;
+using GracefulTear.Core.Services.Permission;
 using GracefulTear.Core.Services.Role;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,17 +11,17 @@ namespace GracefulTear.Web.Controllers
 {
 	public class PermissionController : Controller
 	{
-		private readonly IRoleService roleService;
+		private readonly IPermissionService permissionService;
 
-		public PermissionController(IRoleService roleService)
+		public PermissionController(IPermissionService permissionService)
 		{
-			this.roleService = roleService;
+			this.permissionService = permissionService;
 		}
 
 		[HttpGet]
 		public IActionResult Index([FromQuery]PaginationQuery input)
 		{
-			return View(roleService.Find(input));
+			return View(permissionService.Find(input));
 		}
 	}
 }

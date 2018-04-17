@@ -6,7 +6,7 @@ namespace GracefulTear.Core.Identity
 {
 	public enum RoleType
 	{
-		Permission,
-		Role
+		Role,
+		Permission
 	}
 }

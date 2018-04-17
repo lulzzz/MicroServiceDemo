@@ -48,12 +48,14 @@ namespace GracefulTear.Web
 			{
 				var role1 = new Core.Identity.Role
 				{
-					Name = "role1"
+					Name = "role1",
+					RoleType = Core.Identity.RoleType.Role
 				};
 				dbContext.Roles.Add(role1);
 				var role2 = new Core.Identity.Role
 				{
-					Name = "role2"
+					Name = "role2",
+					RoleType = Core.Identity.RoleType.Role
 				};
 				role2.ChildRoles = new Core.Identity.Role[] { role1 };
 				dbContext.Roles.Add(role2);
@@ -62,7 +64,18 @@ namespace GracefulTear.Web
 				{
 					var role = new Core.Identity.Role
 					{
-						Name = "role" + i
+						Name = "role" + i,
+						RoleType = Core.Identity.RoleType.Role
+					};
+					dbContext.Roles.Add(role);
+				}
+
+				for (int i = 105; i < 200; ++i)
+				{
+					var role = new Core.Identity.Role
+					{
+						Name = "permission" + i,
+						RoleType = Core.Identity.RoleType.Permission
 					};
 					dbContext.Roles.Add(role);
 				}

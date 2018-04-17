@@ -33,7 +33,6 @@ namespace GracefulTear.EntityFrameworkCore.Services.Role
 			else
 			{
 				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto, ICollection<Core.Identity.Role>>(input, e => e.Name.ToLower().Contains(name), null, false, t => t.ChildRoles);
-				output = roleManager.Roles.PageList<Core.Identity.Role, string, RoleDto, ICollection<Core.Identity.Role>>(input, e => e.Name.ToLower().Contains(name), null, false, t => t.ChildRoles);
 			}
 			return output;
 		}

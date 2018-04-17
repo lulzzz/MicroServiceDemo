@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GracefulTear.Core.Services.Role.Dto
+namespace GracefulTear.Core.Services.Permission.Dto
 {
-	public class RoleDto : IDto
+	public class PermissionDto : IDto
 	{
 		//
 		// Summary:
@@ -24,6 +24,10 @@ namespace GracefulTear.Core.Services.Role.Dto
 		// Summary:
 		//     A random value that should change whenever a role is persisted to the store
 		public virtual string ConcurrencyStamp { get; set; }
+
+		public string ParentRoleId { get; set; }
+
+		public RoleType RoleType { get; set; }
 
 		/// <summary>
 		/// Last modification date of this entity.
@@ -45,10 +49,6 @@ namespace GracefulTear.Core.Services.Role.Dto
 		/// </summary>
 		public virtual string CreatorUserId { get; set; }
 
-		public string ParentRoleId { get; set; }
-
-		public RoleType RoleType { get; set; }
-
-		public virtual ICollection<RoleDto> ChildRoles { get; set; }
+		public virtual ICollection<PermissionDto> ChildRoles { get; set; }
 	}
 }

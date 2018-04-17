@@ -1,4 +1,4 @@
-﻿@model GracefulTear.Core.Domains.Repositories.PaginationQueryResult<GracefulTear.Core.Services.Role.Dto.RoleDto>
+﻿@model GracefulTear.Core.Domains.Repositories.PaginationQueryResult<GracefulTear.Core.Services.Permission.Dto.PermissionDto>
 
 <h2>Permission</h2>
 <hr />
@@ -14,46 +14,48 @@
 </form>
 <br />
 <br />
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>NormalizedName</th>
-			<th>ChildRoles</th>
-			<th>CreationTime</th>
-			<th>LastModificationTime</th>
-			<th>CreatorUserId</th>
-			<th>Operation</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model.Data)
-		{
+@if (Model.Data.Count() > 0)
+{
+	<table class="table table-bordered">
+		<thead>
 			<tr>
-				<td>
-					@item.Name
-				</td>
-				<td>
-					@item.NormalizedName
-				</td>
-				<td>
-					@string.Join(",", item.ChildRoles.Select(i => i.Name))
-				</td>
-				<td>
-					@item.CreationTime
-				</td>
-				<td>
-					@item.LastModificationTime
-				</td>
-				<td>
-					@item.CreatorUserId
-				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
-					@Html.ActionLink("Details", "Details", new { Id = item.Id }) |
-					@Html.ActionLink("Delete", "Delete", new { Id = item.Id })
-				</td>
+				<th>Name</th>
+				<th>NormalizedName</th>
+				<th>CreationTime</th>
+				<th>LastModificationTime</th>
+				<th>CreatorUserId</th>
+				<th>Operation</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Data)
+			{
+				<tr>
+					<td>
+						@item.Name
+					</td>
+					<td>
+						@item.NormalizedName
+					</td>
+					@*<td>
+						@string.Join(",", item.ChildRoles.Select(i => i.Name))
+					</td>*@
+					<td>
+						@item.CreationTime
+					</td>
+					<td>
+						@item.LastModificationTime
+					</td>
+					<td>
+						@item.CreatorUserId
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
+						@Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+						@Html.ActionLink("Delete", "Delete", new { Id = item.Id })
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
