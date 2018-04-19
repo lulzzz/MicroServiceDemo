@@ -1,18 +1,18 @@
-## MicroServiceDemoµÄ×¢²á¡¢µÇÂ¼ÓëÊÚÈ¨·şÎñ
+## MicroServiceDemoçš„æ³¨å†Œã€ç™»å½•ä¸æˆæƒæœåŠ¡
 
 * .NET CORE SDK >= 2.0
 * Visual Studio 2017 Community or JetBrains Rider 2017.3
 
-## ¿ª·¢ËµÃ÷
+## å¼€å‘è¯´æ˜
 
-* ÉèÖÃ Auth ÎªÆô¶¯ÏîÄ¿
-* ÔÚ Package Manager Console ÖĞÔËĞĞÈçÏÂÃüÁî
+* è®¾ç½® Auth ä¸ºå¯åŠ¨é¡¹ç›®
+* åœ¨ Package Manager Console ä¸­è¿è¡Œå¦‚ä¸‹å‘½ä»¤
 
 		add-migration Auth -c AuthDbContext
 		add-migration Id4Configuration -c ConfigurationDbContext
 		add-migration Id4PersistedGrants -c PersistedGrantDbContext
 
-* Ö´ĞĞ³É¹¦ºóÔÙÔËĞĞ
+* æ‰§è¡ŒæˆåŠŸåå†è¿è¡Œ
 
 		update-database -Context AuthDbContext
 		update-database -Context PersistedGrantDbContext
