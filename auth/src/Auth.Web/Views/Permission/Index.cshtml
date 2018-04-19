@@ -1,0 +1,61 @@
+﻿@model Auth.Core.Domains.Repositories.PaginationQueryResult<Auth.Core.Services.Permission.Dto.PermissionDto>
+
+<h2>Permission</h2>
+<hr />
+<form method="get">
+	<div class="form-actions no-color">
+		<span class="pull-left">Find name:</span>
+		<div class="form-group col-xs-4">
+			<input type="text" name="Name" value="" class="form-control" />
+		</div>
+		<input type="submit" value="Search" class="btn btn-default" />
+		<a class="pull-right" href="/permission">Back to full List</a>
+	</div>
+</form>
+<br />
+<br />
+@if (Model.Data.Count() > 0)
+{
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>NormalizedName</th>
+				<th>CreationTime</th>
+				<th>LastModificationTime</th>
+				<th>CreatorUserId</th>
+				<th>Operation</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Data)
+			{
+				<tr>
+					<td>
+						@item.Name
+					</td>
+					<td>
+						@item.NormalizedName
+					</td>
+					@*<td>
+						@string.Join(",", item.ChildRoles.Select(i => i.Name))
+					</td>*@
+					<td>
+						@item.CreationTime
+					</td>
+					<td>
+						@item.LastModificationTime
+					</td>
+					<td>
+						@item.CreatorUserId
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
+						@Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+						@Html.ActionLink("Delete", "Delete", new { Id = item.Id })
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
