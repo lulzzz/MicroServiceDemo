@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="static\**" />
+    <Content Remove="static\**" />
+    <EmbeddedResource Remove="static\**" />
+    <None Remove="static\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".babelrc" />
+    <None Remove=".editorconfig" />
+    <None Remove=".eslintignore" />
+    <None Remove=".eslintrc.js" />
+    <None Remove=".postcssrc.js" />
+    <None Remove=".travis.yml" />
+    <None Remove="favicon.ico" />
+    <None Remove="index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="src\**" />
+    <Content Remove="wwwroot\**" />
+  </ItemGroup>
+  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="npm run build" />
+    <!-- Include the newly-built files in the publish output -->
+  </Target>
+  <Target Name="publishScript" AfterTargets="RunWebpack">
+    <!-- Include the newly-built files in the publish output -->
+        <ItemGroup>  
+      <DistFiles Include="wwwroot\dist\**" />
+          </ItemGroup>  
+      <Copy SourceFiles="@(DistFiles)" DestinationFolder="$(PublishDir)\wwwroot\%(RecursiveDir)"> 
+        </Copy>  
+    </Target>
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Service\Service.csproj" />
+  </ItemGroup>
+
+</Project>
