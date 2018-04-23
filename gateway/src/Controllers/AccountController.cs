@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gateway.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("[controller]")]
+    public class AccountController : Controller
     {
         // GET api/values
         [HttpGet]
@@ -15,6 +16,13 @@ namespace Gateway.Controllers
         {
             return new string[] { "value1", "value2" };
         }
+
+	    [HttpGet("[action]")]
+		[Authorize]
+	    public IActionResult Login2()
+	    {
+		    return Redirect("http://www.baidu.com");
+	    }
 
         // GET api/values/5
         [HttpGet("{id}")]
