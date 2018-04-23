@@ -33,3 +33,4 @@ node_modules
 /Auth/AH.Auth/AH.Auth.log
 /Admin/.vs/AH.Admin/v15
 /Auth/.vs/AH.Auth/v15
+/gateway/src/wwwroot/dist
