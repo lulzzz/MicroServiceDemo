@@ -45,17 +45,17 @@ namespace Admin
 		        {
 			        options.SignInScheme = "Cookies";
 
-			        options.Authority = "http://localhost:53616";
+			        options.Authority = Configuration["OAuth:Authority"];
 			        options.RequireHttpsMetadata = false;
 
-			        options.ClientId = "Admin";
-			        options.ClientSecret = "Admin";
-			        options.ResponseType = "code id_token";
+			        options.ClientId = Configuration["OAuth:ClientId"];
+			        options.ClientSecret = Configuration["OAuth:ClientSecret"];
+					options.ResponseType = "code id_token";
 
 			        options.SaveTokens = true;
 			        options.GetClaimsFromUserInfoEndpoint = true;
 
-			        options.Scope.Add("Admin");
+			        options.Scope.Add(Configuration["OAuth:Scope"]);
 			        options.Scope.Add("offline_access");
 		        });
         }
@@ -77,20 +77,20 @@ namespace Admin
                 });
             }
 
-            app.Use(async (context, next) =>
-            {
-                await next();
+			app.Use(async (context, next) =>
+			{
+				await next();
 
-                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-                {
-              // 解决asp.net core HMR的bug
-              context.Request.Path = env.IsDevelopment() ? "/dist/index.html" : "/index.html";
+				if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+				{
+					// 解决asp.net core HMR的bug
+					context.Request.Path = env.IsDevelopment() ? "/dist/index.html" : "/index.html";
 
-                    await next();
-                }
-            }).UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
+					await next();
+				}
+			}).UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
 
-            app.UseStaticFiles();
+			app.UseStaticFiles();
 
             app.UseAuthentication();
 

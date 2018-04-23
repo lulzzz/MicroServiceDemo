@@ -522,7 +522,7 @@ namespace Auth.Web.Controllers
 		{
 			return string.Format(
 				AuthenticatorUriFormat,
-				_urlEncoder.Encode("DNIC.IdentityServer4"),
+				_urlEncoder.Encode("Auth.IdentityServer4"),
 				_urlEncoder.Encode(email),
 				unformattedKey);
 		}

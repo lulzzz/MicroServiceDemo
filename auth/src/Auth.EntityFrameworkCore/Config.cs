@@ -20,7 +20,7 @@ namespace Auth.EntityFrameworkCore
 		{
 			return new List<ApiResource>
 			{
-				new ApiResource("DNIC", "DNIC")
+				new ApiResource("Admin", "Admin")
 			};
 		}
 
@@ -67,8 +67,8 @@ namespace Auth.EntityFrameworkCore
 						new Secret("Admin".Sha256())
 					},
 
-					RedirectUris = { "http://localhost:5001/signin-oidc" },
-					PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
+					RedirectUris = { "http://localhost:5783/signin-oidc" },
+					PostLogoutRedirectUris = { "http://localhost:5783/signout-callback-oidc" },
 					AllowedScopes =
 					{
 						IdentityServerConstants.StandardScopes.OpenId,

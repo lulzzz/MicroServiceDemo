@@ -24,7 +24,7 @@ namespace Auth.EntityFrameworkCore
 		public void EnsureSeedData()
 		{
 			Console.WriteLine("Seeding database...");
-			var connectionString = serviceProvider.GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection");
+			var connectionString = serviceProvider.GetRequiredService<IConfiguration>().GetConnectionString("MySqlConnection");
 
 			using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
 			{
