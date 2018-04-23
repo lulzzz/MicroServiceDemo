@@ -35,30 +35,30 @@ namespace Admin
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-	        services.AddAuthentication(options =>
-		        {
-			        options.DefaultScheme = "Cookies";
-			        options.DefaultChallengeScheme = "oidc";
-		        })
-		        .AddCookie("Cookies")
-		        .AddOpenIdConnect("oidc", options =>
-		        {
-			        options.SignInScheme = "Cookies";
+			services.AddAuthentication(options =>
+				{
+					options.DefaultScheme = "Cookies";
+					options.DefaultChallengeScheme = "oidc";
+				})
+				.AddCookie("Cookies")
+				.AddOpenIdConnect("oidc", options =>
+				{
+					options.SignInScheme = "Cookies";
 
-			        options.Authority = "http://localhost:53616";
-			        options.RequireHttpsMetadata = false;
+					options.Authority = "http://localhost:53616";
+					options.RequireHttpsMetadata = false;
 
-			        options.ClientId = "Admin";
-			        options.ClientSecret = "Admin";
-			        options.ResponseType = "code id_token";
+					options.ClientId = "Admin";
+					options.ClientSecret = "Admin";
+					options.ResponseType = "code id_token";
 
-			        options.SaveTokens = true;
-			        options.GetClaimsFromUserInfoEndpoint = true;
+					options.SaveTokens = true;
+					options.GetClaimsFromUserInfoEndpoint = true;
 
-			        options.Scope.Add("Admin");
-			        options.Scope.Add("offline_access");
-		        });
-        }
+					options.Scope.Add("Admin");
+					options.Scope.Add("offline_access");
+				});
+		}
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
