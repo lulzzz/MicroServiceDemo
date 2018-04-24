@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Models;
 
@@ -20,7 +21,7 @@ namespace Auth.EntityFrameworkCore
 		{
 			return new List<ApiResource>
 			{
-				new ApiResource("Admin", "Admin")
+				new ApiResource("Admin", "Admin",new List<string>{ClaimTypes.Role})
 			};
 		}
 

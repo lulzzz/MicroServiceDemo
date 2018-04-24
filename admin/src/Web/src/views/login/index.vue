@@ -1,5 +1,5 @@
 <template></template>
 <script>
-  window.location='Account/Login2';
+window.location='account/login';
 </script>
  

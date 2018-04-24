@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Security.Claims;
 using Service;
 using IdentityModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -20,7 +22,7 @@ namespace Admin
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+	        Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,7 +37,7 @@ namespace Admin
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-	        services.AddAuthentication(options =>
+			services.AddAuthentication(options =>
 		        {
 			        options.DefaultScheme = "Cookies";
 			        options.DefaultChallengeScheme = "oidc";
@@ -57,6 +59,7 @@ namespace Admin
 
 			        options.Scope.Add(Configuration["OAuth:Scope"]);
 			        options.Scope.Add("offline_access");
+					options.ClaimActions.MapJsonKey(ClaimTypes.Role,ClaimTypes.Role);
 		        });
         }
 

@@ -34,3 +34,4 @@ node_modules
 /Admin/.vs/AH.Admin/v15
 /Auth/.vs/AH.Auth/v15
 /gateway/src/wwwroot/dist
+*.user

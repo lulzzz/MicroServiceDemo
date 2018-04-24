@@ -1,9 +1,14 @@
 import Cookies from 'js-cookie'
+import request from '@/utils/request'
 
-const TokenKey = 'Admin-Token';
+const TokenKey = 'Cookies';
 
 export function getToken() {
-  return Cookies.get(TokenKey);
+    return request({
+        url: '/account/info',
+        method: 'get' //,
+        //params: { token }
+    });
 }
 
 export function setToken(token) {

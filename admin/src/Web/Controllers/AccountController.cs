@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Service;
 using Microsoft.AspNetCore.Authorization;
@@ -23,24 +25,17 @@ namespace Admin.Controllers
             public string Password { get; set; }
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> Login([FromBody]Users user)
-        {
-            await _accountService.LoginAsync(user.UserName,user.Password);
-
-            return Ok();
-        }
-
 		[HttpGet]
 		[Authorize]
-		public IActionResult Login2() => Redirect("http://www.baidu.com");
+		public IActionResult Login() => Redirect("/");
 
 		[HttpGet]
         [Authorize]
         public async Task<IActionResult> Info()
-        {
-            var model = new {Name = "小明",Roles=new []{"admin"}};
+		{
+			var user = User;
+
+            var model = new {Name = User.Claims.FirstOrDefault(x=>x.Type == "name").Value,Roles=new []{ User.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.Role).Value} };
 
             return Ok(model);
         }

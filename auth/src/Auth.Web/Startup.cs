@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Auth.Core;
 using Auth.Core.Identity;
 using Auth.EntityFrameworkCore;
 using Auth.Web.Data;
 using Auth.Web.Extensions;
 using Auth.Web.Models;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -111,7 +115,7 @@ namespace Auth.Web
 					options.TokenCleanupInterval = 30;
 				})
 				.AddAspNetIdentity<User>()
-				.AddAdminEFProvider();
+				.AddAdminEFProvider().AddProfileService<ProfileService>();
 
 			if (env.IsDevelopment())
 			{
@@ -143,5 +147,30 @@ namespace Auth.Web
 				//})
 				;
 		}
+		
 	}
+
+	    public class ProfileService : IProfileService
+    {
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        {
+            try
+            {
+                //depending on the scope accessing the user data.
+                var claims = context.Subject.Claims.ToList();
+
+                //set issued claims to return
+                context.IssuedClaims = claims.ToList();
+            }
+            catch (Exception ex)
+            {
+                //log your error
+            }
+        }
+
+        public async Task IsActiveAsync(IsActiveContext context)
+        {
+            context.IsActive = true;
+        }
+    }
 }
